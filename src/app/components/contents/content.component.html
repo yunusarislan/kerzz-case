@@ -1,0 +1,48 @@
+<ion-col size="12">
+  <span>Sonuçlar</span>
+</ion-col>
+<ion-col size="12">
+
+  <div *ngIf="placesData.length > 0">
+    <ion-card *ngFor="let place of placesData">
+      
+      <div class="liked-score">
+        <img class="star" src="/assets/img/star.png"> <span class="score-info"> {{place.storeInfo.userPoint}} </span>
+      </div>
+
+      <div *ngIf="place.images && place.images.length > 0">
+        <div *ngFor="let image of place.images">
+          <img [src]="getImageUrl(image)" alt="Shop Image" />
+        </div>
+      </div>
+
+      <ion-card-header>
+        <ion-card-title class="wrapped-title">{{place.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-label>
+          <p>
+            <ion-card-subtitle>{{place.type | titlecase}}</ion-card-subtitle>
+            <span><img style="height: 14px; width: 14px; margin: 3px !important;" src="/assets/img/shopping_basket.png">
+              <span>Min. Sipariş Tutarı: ₺{{place.storeInfo.minOrderPrice}}</span>
+            </span>
+          </p>
+          <p >
+            {{place.distance}} km yakınında
+            <span class="working-hours" *ngFor="let workingHour of place.storeInfo.workingHours"> <span
+                [ngClass]="{'closed-shop': getWorkingHoursStatus(workingHour) === 'İşletme Kapalı', 'open-shop': getWorkingHoursStatus(workingHour) === 'İşletme Açık'}">{{
+                getWorkingHoursStatus(workingHour)}}</span> {{ workingHour.open}} /
+              {{workingHour.close}}</span>
+          </p>
+        </ion-label>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="loadMorePlace($event)">
+    <ion-infinite-scroll-content loadingText="Yükleniyor..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-col>

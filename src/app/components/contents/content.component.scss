@@ -1,0 +1,93 @@
+ion-col {
+    margin-bottom: 10px;
+    span {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    ion-card {
+        z-index: 1;
+        width: 90vw;
+        img {
+            width: 90vw;
+        }
+        ion-card-header {
+            padding: 10px 0 5px 10px;
+            ion-card-title {
+                font-weight: bold;
+                font-size: 18px;
+            }
+        }
+
+        ion-card-content {
+            ion-label {
+                ion-card-subtitle {
+                    font-size: 12px !important;
+                }
+                p {
+                    display: flex;
+                    justify-content: space-between;
+                    font-weight: bold;
+                    font-size: 12px;
+                    padding: 0 !important;
+                    span {
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        font-weight: 600;
+                        .open-or-close-shop {
+                            color: #34c47c;
+                            margin-right: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.liked-score {
+    height: 32px;
+    background-color: #b70014;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2 !important;
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 10px;
+    width: 15vw;
+    max-width: 50vw;
+}
+
+.star {
+    width: 13px !important;
+}
+
+.score-info {
+    color: white;
+    font-size: 12px !important;
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+.working-hours {
+    font-weight: 700 !important;
+    justify-content: space-between;
+}
+
+.closed-shop {
+    color: red;
+}
+
+.open-shop {
+    color: #34c47c;
+    margin-right: 5px !important;
+}
+
+.wrapped-title {
+    max-width: 80%;
+    overflow-wrap: break-word;
+  }
+
+
