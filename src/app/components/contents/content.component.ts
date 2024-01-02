@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { DistanceService } from 'src/app/services/distance.service';
-import { Platform } from '@ionic/angular';
-import { Geolocation } from '@capacitor/geolocation';
+
+
 
 
 @Component({
@@ -30,44 +30,52 @@ export class ContentComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private distanceService: DistanceService,
-    private geoLocation: Geolocation,
-    private platform: Platform
   ) { }
 
-  ngOnInit(): void {
+  
+
+ async ngOnInit() {
+  this.getCurrentLocation()
     // for android/ios platform
-    this.platform.ready().then(res => {
-      this.requestGeoLocationPermissions()
-    }).catch((err) => {
-      console.log("Error to get location")
-    }
-    )
+    // this.platform.ready().then(res => {
+    //   this.requestGeoLocationPermissions()
+    // }).catch((err) => {
+    //   console.log("Error to get location")
+    // }
+    // )
     // for web
-    // navigator.geolocation.getCurrentPosition(
-    //   (position) => {
-    //     this.parameter.latitude = position.coords.latitude;
-    //     this.parameter.longitude = position.coords.longitude;
-    //     this.loadMorePlace()
-    //   })
+      // console.log( Geolocation.requestPermissions())
+      // navigator.geolocation.getCurrentPosition(
+      //   (position) => {
+      //     this.parameter.latitude = position.coords.latitude;
+      //     this.parameter.longitude = position.coords.longitude;
+      //     this.loadMorePlace()
+      //   })
+    
   }
 
-  async requestGeoLocationPermissions() {
-    try {
-      const status = await Geolocation.requestPermissions();
-      if (status.location == 'granted') {
-        this.getCurrentLocation();
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  // async requestGeoLocationPermissions() {
+  //   try {
+  //     const status = await Geolocation.requestPermissions();
+  //     if (status.location == 'granted') {
+  //       this.getCurrentLocation();
+  //     }
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
   async getCurrentLocation() {
-    const coordinates = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }).then(data => {
-      this.parameter.latitude = data.coords.latitude;
-      this.parameter.longitude = data.coords.longitude;
+    window.navigator.geolocation.getCurrentPosition((position)=>{
+      this.parameter.latitude  = position.coords.latitude
+      this.parameter.longitude  = position.coords.longitude
       this.loadMorePlace()
     })
+    // const coordinates = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }).then(data => {
+    //   this.parameter.latitude = data.coords.latitude;
+    //   this.parameter.longitude = data.coords.longitude;
+    //   this.loadMorePlace()
+    // })
   }
 
   loadMorePlace(event?: any) {
@@ -120,4 +128,6 @@ export class ContentComponent implements OnInit {
     return this.distance
   }
 }
+
+
 
