@@ -35,35 +35,8 @@ export class ContentComponent implements OnInit {
   
 
  async ngOnInit() {
-  this.getCurrentLocation()
-    // for android/ios platform
-    // this.platform.ready().then(res => {
-    //   this.requestGeoLocationPermissions()
-    // }).catch((err) => {
-    //   console.log("Error to get location")
-    // }
-    // )
-    // for web
-      // console.log( Geolocation.requestPermissions())
-      // navigator.geolocation.getCurrentPosition(
-      //   (position) => {
-      //     this.parameter.latitude = position.coords.latitude;
-      //     this.parameter.longitude = position.coords.longitude;
-      //     this.loadMorePlace()
-      //   })
-    
+  this.getCurrentLocation()  
   }
-
-  // async requestGeoLocationPermissions() {
-  //   try {
-  //     const status = await Geolocation.requestPermissions();
-  //     if (status.location == 'granted') {
-  //       this.getCurrentLocation();
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
 
   async getCurrentLocation() {
     window.navigator.geolocation.getCurrentPosition((position)=>{
@@ -71,11 +44,7 @@ export class ContentComponent implements OnInit {
       this.parameter.longitude  = position.coords.longitude
       this.loadMorePlace()
     })
-    // const coordinates = await Geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }).then(data => {
-    //   this.parameter.latitude = data.coords.latitude;
-    //   this.parameter.longitude = data.coords.longitude;
-    //   this.loadMorePlace()
-    // })
+
   }
 
   loadMorePlace(event?: any) {
